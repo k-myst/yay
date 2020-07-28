@@ -14,3 +14,23 @@
 #    { hoge: "foo", "piyo" => :boom, 1 => "one" }
 # < output
 #   { "hoge" => "foo", :piyo => :boom, :"1" => "one" }
+class SymbolManipulator
+  def self.hash_key_switcher(obj)
+    return obj unless obj.kind_of?(Hash)
+
+    result = Hash.new([])
+    obj.each do |key, value|
+      after_key = if key.kind_of?(String)
+                    key.to_sym
+                  elsif key.kind_of?(Symbol)
+                    key.to_s
+                  else
+                    key.to_s.to_sym
+                  end
+
+      result[after_key] = value
+    end
+
+    result
+  end
+end
