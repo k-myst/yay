@@ -26,3 +26,28 @@
 #         Configure 'sugoi' as 'oniyabai'
 #         Configure 'foo' as 'iihanashi'
 #         Configure 'hoge' as 'uhyo-'
+class Args
+  def calc(a, b, c = b)
+    result = []
+    c.times do
+      result << a.to_s * b
+    end
+    result
+  end
+
+  def count_object(array: [], keyword:)
+    result = array.find_all do |num|
+      num == keyword
+    end
+    result.length
+  end
+
+  def configure(benri:, sugoi:, **option)
+    puts "Configure 'benri' as '#{benri}'"
+    puts "Configure 'sugoi' as '#{sugoi}'"
+    option.keys.sort.each do |k|
+      next unless k.to_s.start_with?("c_")
+      puts "Configure '#{k.to_s.delete_prefix('c_')}' as '#{option[k]}'"
+    end
+  end
+end
