@@ -5,3 +5,12 @@
 #   戻り値は、引数に渡した文字列を二つ連結したものを返してください e.g. "text" => "texttext"
 #   ただし、文字列 "test" を引数に渡したときに限って、次の例外を発生させてください
 #   例外は、StandardErrorを継承したDoubleErrorを発生させてください。例外クラスは、 `Idioms::` の下の名前空間で定義してください
+class Idioms
+  def self.double(value)
+    raise DoubleError if value == "test"
+    value.to_s * 2
+  end
+
+  class DoubleError < StandardError
+  end
+end
